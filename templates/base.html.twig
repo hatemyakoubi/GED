@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>{% block title %}{{ "backend.global.welcome"|trans }}{% endblock %}</title>
+        {% block metas %}
+            <meta charset="UTF-8">
+        {% endblock %}
+        {% block stylesheets %}
+        
+        {% endblock %}
+    </head>
+    <body {% block bodyclass %}class="" {% endblock %}>
+
+        
+        {% block body %}
+       
+        {% endblock %}
+        {% block javascripts %}{% endblock %}
+    </body>
+</html>

@@ -1,0 +1,93 @@
+{% extends "admin/bars.html.twig" %}
+
+{% block contenpage %}
+	<div class="">
+		<div class="page-title">
+			<div class="title_left">
+				
+			</div>
+		</div>
+
+		<div class="clearfix"></div>
+
+		<div class="row">
+			<div class="col-md-12">
+				<div class="x_panel">
+					<div class="x_title">
+						<h2>
+							{{ "backend.user.user_listing"|trans }}
+						</h2>
+						<ul class="nav navbar-right panel_toolbox">
+							<li>
+								<a href="{{path('app_admin_new_user')}}" class="btn btn-success">Nouvau utilisateur</a>
+							</li>
+						</ul>
+						<div class="clearfix"></div>
+					</div>
+					<div class="x_content">
+						<div class="row">	
+							<table id="example" class="display table table-striped table-bordered dataminetables">
+								<thead>
+									<th>ID</th>
+									<th>{{ "backend.user.cin"|trans }}</th>
+									<th>{{ "backend.user.nom"|trans }}</th>
+									<th>{{ "backend.user.prenom"|trans }}</th>
+									<th>{{ "backend.user.username"|trans }}</th>
+									<th>Derniere Cnx</th>
+									<th>Derniere Décnx</th>
+									<th>{{ "backend.user.modifier"|trans }}</th>
+									<th>{{ "backend.user.status"|trans }}</th>
+									<th>{{ "backend.user.delete"|trans }}</th>
+								</thead>
+								<tbody>
+									{# {% for user in users|filter(user => not user.deleted)  %} #}
+									{# {% set i = 0 %} #}
+									{% for user in userConnecter%}
+										<tr>
+											<td>{{ user.utilisateur.id }}</td>
+											<td>{{ user.utilisateur.cin }}</td>
+											<td>{{ user.utilisateur.username }}</td>
+											<td>{{ user.utilisateur.nom }}</td>
+											<td>{{ user.utilisateur.prenom }}</td>
+											<td>										
+												{{user.DateAction|date('Y-m-d h:i:s')}}
+											</td>
+											<td>
+											{# {{dump(dateDeconnecter)}} #}
+												{# <!-- {{dateDeconnecter[i].date|date('Y-m-d h:i:s')}}
+												{% set i = i+1 %} --> #}
+											</td>
+											<td>
+												<a class="btn btn-primary" href="{{path('app_admin_edit_user',{'id':user.id})}}">
+													<i class="fa fa-edit"></i>
+												</a>
+											</td>
+											<td>
+												{%  if user.utilisateur.active %}
+													<a class="btn btn-success activate-link" href="{{ path('app_admin_changevalidite_user', {'id': user.id}) }}">
+														<i class="fa fa-check"></i>
+													</a>
+												{% else %}
+													<a class="btn btn-warning activate-link" href="{{ path('app_admin_changevalidite_user', {'id': user.id}) }}">
+														<i class="fa fa-times"></i>
+													</a>
+												{% endif %}
+											</td>
+											<td>
+												<a href="{{ path('app_admin_delete_user', {'id': user.id}) }}" class="btn btn-danger disable-btn del-link" 
+												
+												type="submit" onClick="return confirm('Êtes-vous sûr de bien vouloir supprimer cet élément?');">
+													<i class="fa fa-trash"></i>
+												</a>
+											</td>
+										</tr>
+									{% endfor %}
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+{% endblock %}

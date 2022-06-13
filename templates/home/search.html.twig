@@ -1,0 +1,87 @@
+{% extends "admin/bars.html.twig" %}
+
+{% block contenpage %}
+    <h1>main</h1>
+    <form method="post">
+    {{form_start(form)}}
+     {{form_widget(form)}}
+    {{form_end(form)}}
+    </form>
+
+    {% for message in app.flashes('msg') %}
+		<div class="alert alert-primary">
+			{{ message }}
+		</div>
+	{% endfor %}
+    {% if resultats %}
+    <div class="row">
+        <div class="col-md-12">
+            <div class="x_panel">
+                <div class="x_title">
+                    <h2>
+                        Listes des contrats
+                    </h2>
+                    
+                    <div class="clearfix"></div>
+                </div>
+
+    <div class="x_content">
+        <div class="row">
+
+            <table id="example" class="display table table-striped table-bordered dataminetables">
+                <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Code Centre</th>
+                        <th>Code Recette</th>
+                        <th>Type resultat</th>
+                        <th>Type d'operation</th>
+                        <th>Reference</th>
+                        <th>Date resultat</th>
+                        <th>Date Modification</th>
+                        <th>Date Sauvegarde</th>
+                        <th>Redacteur</th>
+                        <th>Montant</th>
+                        <th>AdresseEmp</th>
+                        <th>actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for resultat in resultats %}
+                    <tr>
+                        <td>{{ resultat.id }}</td>
+                        <td>{{ resultat.codeCentre }}</td>
+                        <td>{{ resultat.codeRecette }}</td>
+                        <td>{{ resultat.typeContrat }}</td>
+                        <td>{{ resultat.typeOperation }}</td>
+                        <td>{{ resultat.reference }}</td>
+                        <td>{{ resultat.dateContrat ? resultat.dateContrat|date('Y-m-d') : '' }}</td>
+                        <td>{{ resultat.dateModification ? resultat.dateModification|date('Y-m-d') : '' }}
+                        </td>
+                        <td>{{ resultat.dateSauvegarde ? resultat.dateSauvegarde|date('Y-m-d') : '' }}</td>
+                        <td>{{ resultat.redacteur }}</td>
+                        <td>{{ resultat.montant }}</td>
+                        <td>{{ resultat.adresseEmp }}</td>
+                        <td>
+                            <a href="{{ path('app_contrat_show', {'id': resultat.id}) }}" class="btn btn-primary"><i class="fa fa-eye"></i></a>
+                            <a href="{{ path('app_contrat_edit', {'id': resultat.id}) }}" class="btn btn-warning"><i class="fa fa-edit"></i></a>
+                        </td>
+                    </tr>
+                    {% else %}
+                    <tr>
+                        <td colspan="13">no records found</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+                 </div>
+            </div>
+        </div>
+    </div>
+</div>
+ 
+    {% endif %}
+    
+{% endblock %}

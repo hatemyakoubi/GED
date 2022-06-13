@@ -1,0 +1,86 @@
+{% extends "admin/bars.html.twig" %}
+
+{% block contenpage %}
+
+
+
+<div class="row">
+
+    <div class="col-md-12">
+        <div class="x_panel">
+            <div class="x_title">
+                <h2>
+                    Listes des contrats
+                </h2>
+
+                <div class="clearfix"></div>
+            </div>
+
+            <div class="x_content">                               
+                <table id="example" class="display table table-striped table-bordered dataminetables">
+                <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Code Centre</th>
+                        <th>Code Recette</th>
+                        <th>Type contrat</th>
+                        <th>Reference</th>
+                        <th>Type d'operation</th>
+                        <th>Date Modification</th>
+                        <th>utilisateur</th>
+                        <th>actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for contrat in contrats %}
+                    <tr>
+                        <td>{{ contrat.id }}</td>
+                        <td>{{ contrat.codeCentre }}</td>
+                        <td>{{ contrat.codeRecette }}</td>
+                        <td>{{ contrat.typeContrat }}</td>
+                        <td>{{ contrat.reference }}</td>
+                        <td>
+                            {% for operation in contrat.operations %}
+                                <li>
+                                 {{ operation.typeOperation }}
+                                </li>
+                            {% endfor %}
+                        </td>
+                        <td>
+                         {% for operation in contrat.operations %}
+                                <li>
+                                  {{ operation.dateOperation ? operation.dateOperation|date('Y-m-d') : '' }}
+                                </li>
+                            {% endfor %}
+                       
+                        </td>  
+                        <td>
+                            {% for operation in contrat.operations %}
+                                <li>
+                                     {{ operation.utilisateur.nom }} {{ operation.utilisateur.prenom }}
+                                </li>
+                            {% endfor %}
+                        </td>       
+                        <td>
+                            <a href="{{ path('app_contrat_show', {'id': contrat.id}) }}" class="btn btn-primary"><i class="fa fa-eye"></i></a>
+                            <a href="{{ path('app_contrat_edit', {'id': contrat.id}) }}" class="btn btn-warning"><i class="fa fa-edit"></i></a>
+                        </td>
+                    </tr>
+                    {% else %}
+                    <tr>
+                        <td colspan="13">no records found</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+
+
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+
+
+
+{% endblock %}

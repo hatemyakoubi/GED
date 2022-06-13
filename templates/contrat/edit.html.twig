@@ -1,0 +1,119 @@
+{% extends 'admin/bars.html.twig' %}
+
+{% block contenpage %}
+    <div class="">
+        <div class="page-title">
+            <div class="title_left">
+                <h5><a href="{{ path('app_contrat_index') }}">{{ "backend.contrat.structure_listing"|trans }}</a> >> Edit {{ "backend.menu.contrats"|trans }} </h5>
+            </div>
+        </div>
+
+        <div class="clearfix"></div>
+
+        <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="x_panel">
+                    <div class="x_title">
+                        <h2>Edit {{ "backend.menu.contrats"|trans }}</h2>
+                        <ul class="nav navbar-right panel_toolbox">
+                            <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                            </li>
+                            <li><a class="close-link"><i class="fa fa-close"></i></a>
+                            </li>
+                        </ul>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="x_content">
+                    <form method="post" enctype="multipart/form-data">
+                        {{ form_start(form, {'attr': {'id':'form-contrat'}}) }}
+                        <div>
+                            {{form_row(form.codeCentre, {'value' : contrat.codeCentre} ) }}
+                        </div>
+                        <div>
+                             {{form_row(form.codeRecette, {'value' : contrat.codeRecette})}}
+                        </div>
+                        <div>
+                             {{form_row(form.typeContrat, {'value' : contrat.typeContrat})}}
+                        </div>
+                        <div>
+                             {{form_row(form.typeOperation, {'value' : contrat.typeOperation})}}
+                        </div>
+                        <div>
+                             {{form_row(form.reference, {'value' : contrat.reference})}}
+                        </div>
+                        <div>
+                             {{form_row(form.dateContrat, {'value' : contrat.dateContrat|date('Y-m-d') })}}
+                        </div>
+                        <div>
+                            {{form_row(form.redacteur, {'value' : contrat.redacteur})}}
+                       </div>
+                       <div>
+                            {{form_row(form.montant, {'value' : contrat.montant})}}
+                       </div>
+                       <div>
+                            {{form_row(form.adresseEmp, {'value' : contrat.adresseEmp})}}
+                       </div>
+                       <!-- <div>
+                            {# {{form_row(form.doc)}} #}
+                       </div> -->
+                       <hr>
+                       <h2>Vendeur</h2>
+                        {% for acteur in contrat.acteurs %}
+                            
+                       
+                         {% if acteur.type == 'Vendeur' %}
+                       <div>
+                        {{form_row(form.identifiantV, {'value' : acteur.identifiant})}}
+                        </div>
+                         <div>
+                         {{form_row(form.nomV, {'value' : acteur.nom})}}
+                        </div>
+                         
+                         <div>
+                            {{form_row(form.prenomV, {'value' : acteur.prenom})}}
+                        </div>
+                        {% else %}
+                            <div>
+                        <hr>
+                        <h2>Acheteur</h2>
+                        {{form_row(form.identifiantA, {'value' : acteur.identifiant})}}
+                        </div>
+                        <div>
+                                {{form_row(form.nomA, {'value' : acteur.nom})}}
+                        </div>
+                        <div>
+                                {{form_row(form.prenomA, {'value' : acteur.prenom})}}
+                        </div>
+                         {% endif %}
+                         {% endfor %}
+                        
+                        
+                        <div id="block-file">
+                            <input type="file" name="file" id="file">
+                            <!-- Drag and Drop container-->
+                            <div class=" col upload-area"  id="uploadfile">
+                                <h1>Faites glisser et déposez le fichier ici<br/>Où<br/>Cliquez pour sélectionner le fichier</h1>
+                            </div> 
+                        </div>
+                        <div id="block-btnEdit" >
+                            <a href="#" class="btn btn-warning" style="position: absolute; margin-left: 5px;margin-top: 80px;" id="btn-edit" onclick="AfficheFile()" ><i class="fa fa-edit"></i></a>
+                            <embed src="data:application/pdf;base64,{{file}}" type="application/pdf"   height="700px" width="500"> 
+                        </div>
+                    
+                        <div class="ln_solid"></div>
+                        <div class="item form-group">
+                            <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
+                                <a class="btn btn-warning" href="{{ path('app_contrat_index') }}">{{ "backend.user.cancel"|trans }}</a>
+                                <button type="submit" name="valider" class="btn btn-success" >{{ "backend.user.register"|trans }}</button>
+                            </div>
+                        </div>
+                        {{ form_end(form) }}
+                    </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+    

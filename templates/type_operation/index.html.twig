@@ -1,0 +1,64 @@
+{% extends "admin/bars.html.twig" %}
+
+{% block contenpage %}
+<div class="">
+    <div class="page-title">
+        <div class="title_left">
+
+        </div>
+    </div>
+
+    <div class="clearfix"></div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="x_panel">
+                <div class="x_title">
+                    <h2>
+                        Listes des type d'operations
+                    </h2>
+                    <ul class="nav navbar-right panel_toolbox">
+                        <li>
+                            <a href="{{path('app_type_operation_new')}}" class="btn btn-success">Nouveau type d'opération</a>
+                        </li>
+                    </ul>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="x_content">
+                    <div class="row">
+
+                        <table id="example" class="display table table-striped table-bordered dataminetables">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Identifiant</th>
+                <th>Libelle</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for type_operation in type_operations %}
+            <tr>
+                <td>{{ type_operation.id }}</td>
+                <td>{{ type_operation.identifiant }}</td>
+                <td>{{ type_operation.libelle }}</td>
+                <td>
+                    <a href="{{ path('app_type_operation_show', {'id': type_operation.id}) }}" class="btn btn-primary"><i class="fa fa-eye"></i></a>
+                    <a href="{{ path('app_type_operation_edit', {'id': type_operation.id}) }}" class="btn btn-warning"><i class="fa fa-edit"></i></a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="4">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+{% endblock %}

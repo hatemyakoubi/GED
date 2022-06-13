@@ -1,0 +1,77 @@
+{% extends "admin/bars.html.twig" %}
+
+{% block contenpage %}
+	<div class="">
+		<div class="page-title">
+			<div class="title_left">
+				
+			</div>
+		</div>
+
+		<div class="clearfix"></div>
+
+		<div class="row">
+			<div class="col-md-12">
+				<div class="x_panel">
+					<div class="x_title">
+						<h2>
+							{{ "backend.structure.structure_listing"|trans }}
+						</h2>
+						<ul class="nav navbar-right panel_toolbox">
+							<li>
+								<a href="{{path('app_structure_new')}}" class="btn btn-success">Nouvelle Structure</a>
+							</li>
+						</ul>
+						<div class="clearfix"></div>
+					</div>
+					<div class="x_content">
+						<div class="row">
+							<table id="example" class="display table table-striped table-bordered dataminetables">
+								<thead>
+									<th>{{ "backend.structure.id"|trans }}</th>
+									<th>{{ "backend.structure.codeStructure"|trans }}</th>
+									<th>{{ "backend.structure.type"|trans }}</th>
+									<th>{{ "backend.structure.lib"|trans }}</th>
+									<th>{{ "backend.structure.etat"|trans }}</th>
+									<th>{{ "backend.structure.codeCentre"|trans }}</th>
+									<th>{{ "backend.structure.utilisateurs"|trans }}</th>
+									<th>{{ "backend.structure.modifier"|trans }}</th>
+									<th>{{ "backend.structure.delete"|trans }}</th>
+								</thead>
+								<tbody>
+									{% for structure in structures%}
+										<tr>
+											<td>{{ structure.id }}</td>
+											<td>{{ structure.codeStructure }}</td>
+											<td>{{ structure.type }}</td>
+											<td>{{ structure.lib }}</td>
+											<td>{{ structure.etat }}</td>
+											<td>{{ structure.codeCentre }}</td>
+											<td>
+												{% for user in structure.utilisateurs %}
+													<li>{{user.nom}} {{user.prenom}}</li>
+												{% endfor %}
+											</td>
+											<td>
+												<a class="btn btn-primary" href="{{path('app_structure_edit',{'id':structure.id})}}">
+													<i class="fa fa-edit"></i>
+												</a>
+											</td>
+											
+											<td>
+												<a href="{{ path('app_structure_delete', {'id': structure.id}) }}" class="btn btn-danger disable-btn del-link" 
+												 onClick="return confirm('Êtes-vous sûr de bien vouloir supprimer cet élément?');">
+													<i class="fa fa-trash"></i>
+												</a>
+											</td>
+										</tr>
+									{% endfor %}
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+{% endblock %}

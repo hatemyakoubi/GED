@@ -1,0 +1,3 @@
+.hide { /* La classe réponsable du masquage d'un élément HTML, il existera toujours dans le DOM ! */
+    display: none;
+}

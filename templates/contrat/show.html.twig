@@ -1,0 +1,113 @@
+{% extends 'admin/bars.html.twig' %}
+
+
+{% block title %}Contrat{% endblock %}
+
+{% block contenpage %}
+<div class="page-title">
+    <div class="title_left">
+        <h5><a href="{{ path('app_contrat_index') }}">{{ "backend.contrat.structure_listing"|trans }}</a> >>Détail Contrat N° {{contrat.id}}  </h5>
+    </div>
+</div>
+
+    <table class="table">
+        <tbody>
+            
+
+            <tr>
+                <th>Id</th>
+                <td>{{ contrat.id }}</td>
+            </tr>
+            <tr>
+                <th>CodeCentre</th>
+                <td>{{ contrat.codeCentre }}</td>
+            </tr>
+            <tr>
+                <th>CodeRecette</th>
+                <td>{{ contrat.codeRecette }}</td>
+            </tr>
+            <tr>
+                <th>TypeContrat</th>
+                <td>{{ contrat.typeContrat }}</td>
+            </tr>
+            <tr>
+                <th>TypeOperation</th>
+                <td>{{ contrat.typeOperation }}</td>
+            </tr>
+            <tr>
+                <th>Reference</th>
+                <td>{{ contrat.reference }}</td>
+            </tr>
+            <tr>
+                <th>DateContrat</th>
+                <td>{{ contrat.dateContrat ? contrat.dateContrat|date('Y-m-d') : '' }}</td>
+            </tr>
+            <tr>
+                <th>DateModification</th>
+                <td>
+                    {% if contrat.dateModification != null %}
+                    {{ contrat.dateModification ? contrat.dateModification|date('Y-m-d') : '' }}
+                    {% else %}
+                        Ce contrat pas encore modifié
+                    {% endif %}
+                </td>
+            </tr>
+            <tr>
+                <th>DateSauvegarde</th>
+                <td>{{ contrat.dateSauvegarde ? contrat.dateSauvegarde|date('Y-m-d') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Redacteur</th>
+                <td>{{ contrat.redacteur }}</td>
+            </tr>
+            <tr>
+                <th>Montant</th>
+                <td>{{ contrat.montant }}</td>
+            </tr>
+            <tr>
+                <th>AdresseEmp</th>
+                <td>{{ contrat.adresseEmp }}</td>
+            </tr>
+            <tr>
+                <th>Vendeur</th>
+                 <td> 
+                    {% for acteur in contrat.acteurs %}
+                      
+                       {% if acteur.type =="Vendeur" %}
+                           
+                                    <li>{{acteur.identifiant}}</li> 
+                                    <li> {{acteur.prenom}} {{acteur.nom}}</li>                       
+                        {% endif %}   
+                    {% endfor %}
+                 </td>
+            </tr>
+            <tr>
+                <th>Acheteur</th>
+                <td> 
+                    {% for acteur in contrat.acteurs %}
+                      
+                       {% if acteur.type =="Acheteur" %}
+                            
+                                   <li>{{acteur.identifiant}}</li> 
+                                   <li> {{acteur.prenom}} {{acteur.nom}}</li>
+                        {% endif %}   
+                    {% endfor %}
+                </td>
+            </tr>
+            
+            <tr>
+                <th>Fichier</th>
+                <td>
+                     <embed src="data:application/pdf;base64,{{file}}" type="application/pdf"   height="700px" width="500">                  
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_contrat_index') }}">back to list</a>
+
+    <a href="{{ path('app_contrat_edit', {'id': contrat.id}) }}">edit</a>
+
+    {{ include('contrat/_delete_form.html.twig') }}
+{% endblock %}

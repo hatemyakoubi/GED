@@ -1,0 +1,102 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Login
+{% endblock %}
+{% block stylesheets %}
+	<meta
+	http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<!-- Meta, title, CSS, favicons, etc. -->
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta
+	name="viewport" content="width=device-width, initial-scale=1">
+
+	<!-- Bootstrap -->
+	<link
+	href="{{ asset('vendors/bootstrap/dist/css/bootstrap.min.css') }}" rel="stylesheet">
+	<!-- Font Awesome -->
+	<link
+	href="{{ asset('vendors/font-awesome/css/font-awesome.min.css') }}" rel="stylesheet">
+	<!-- NProgress -->
+	<link
+	href="{{ asset('vendors/nprogress/nprogress.css') }}" rel="stylesheet">
+	<!-- Animate -->
+	<link
+	href="{{ asset('vendors/animate.css/animate.css') }}" rel="stylesheet">
+	<!-- iCheck -->
+	<link
+	href="{{ asset('vendors/iCheck/skins/flat/green.css') }}" rel="stylesheet">
+	<!-- Custom Theme Style -->
+	<link href="{{ asset('build/css/custom.min.css') }}" rel="stylesheet">
+{% endblock %}
+{% block bodyclass %}
+class="login"
+{% endblock %}
+{% block body %}
+	<div>
+		<a class="hiddenanchor" id="signup"></a>
+		<a class="hiddenanchor" id="signin"></a>
+		<div class="login_wrapper">
+			<div class="animate form login_form">
+				<section class="login_content">
+						<img src="{{asset('uploads/images/logo.gif')}}">
+					<form method="post">
+						<h1>GED Dashboard</h1>
+						{% for message in app.flashes('success') %}
+							<div class="alert alert-primary">
+								{{ message }}
+							</div>
+						{% endfor %}
+						{% if error %} 
+							<div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+							{# {{error}} #}
+						 {% endif %}
+						<div>
+                            <input type="text" value="{{ last_username }}" name="username" id="inputEmail" class="form-control" autocomplete="email" required autofocus>
+						</div>
+						
+						
+						<div>
+                            <input type="password" name="password" id="inputPassword" class="form-control" autocomplete="current-password" required>
+							<input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+						</div>
+						<!-- <div>
+							<input type="checkbox" class="" name="_remember_me"><span>Remember me</span>
+						</div> -->
+						<div>
+							<button class="btn btn-success submit">Se connecter</button>
+							{# <a class="reset_pass" href="{{path('app_forgot_password_request')}}">Lost your password?</a> #}
+						</div>
+
+						<div class="separator">
+							{# <p class="change_link">
+								{{ "backend.login.new_site"|trans }}
+								<a href="#signup" class="to_register">
+									{{ "backend.login.create_acount"|trans }}
+								</a>
+							</p> #}
+
+							<div class="clearfix"></div>
+							<br/>
+
+							<div>
+								<h1>
+									
+									DevProd Solution</h1>
+								<p>©{{ "now"|date("Y") }}
+									{{ "backend.login.all_rights"|trans }}
+									{# <a target="_blank" href="//example.com">example.com<a/></p> #}
+								</p>
+							</div>
+						</div>
+
+						<div class="clearfix"></div>
+						
+					</form>
+				</section>
+			</div>
+		
+		</div>
+	</div>
+{% endblock %}
+{% block javascripts %}{% endblock %}

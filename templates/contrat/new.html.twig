@@ -1,0 +1,103 @@
+{% extends 'admin/bars.html.twig' %}
+
+{% block contenpage %}
+    <div class="">
+        <div class="page-title">
+            <div class="title_left">
+                <h5><a href="{{ path('app_contrat_index') }}">{{ "backend.contrat.structure_listing"|trans }}</a> >> {{ "backend.menu.contrats"|trans }} </h5>
+            </div>
+        </div>
+
+        <div class="clearfix"></div>
+
+        <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="x_panel">
+                    <div class="x_title">
+                        <h2>{{ "backend.menu.contrats"|trans }}</h2>
+                        <ul class="nav navbar-right panel_toolbox">
+                            <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                            </li>
+                            <li><a class="close-link"><i class="fa fa-close"></i></a>
+                            </li>
+                        </ul>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="x_content">
+                    <form method="post" enctype="multipart/form-data">
+                        {{ form_start(form, {'attr': {'id':'form-contrat'}}) }}
+                        <div>
+                            {{form_row(form.codeCentre)}}
+                        </div>
+                        <div>
+                             {{form_row(form.codeRecette)}}
+                        </div>
+                        <div>
+                             {{form_row(form.typeContrat)}}
+                        </div>
+                        <div>
+                             {{form_row(form.typeOperation)}}
+                        </div>
+                        <div>
+                             {{form_row(form.reference)}}
+                        </div>
+                        <div>
+                             {{form_row(form.dateContrat)}}
+                        </div>
+                        <div>
+                            {{form_row(form.redacteur)}}
+                       </div>
+                       <div>
+                            {{form_row(form.montant)}}
+                       </div>
+                       <div>
+                            {{form_row(form.adresseEmp)}}
+                       </div>
+                       <!-- <div>
+                            {# {{form_row(form.doc)}} #}
+                       </div> -->
+                       <hr>
+                       <h2>Vendeur</h2>
+                       <div>
+                        {{form_row(form.identifiantV)}}
+                   </div>
+                   <div>
+                        {{form_row(form.nomV)}}
+                   </div>
+                    <div>
+                            {{form_row(form.prenomV)}}
+                    </div>
+                   <div>
+                    <hr>
+                    <h2>Acheteur</h2>
+                    {{form_row(form.identifiantA)}}
+                    </div>
+                    <div>
+                            {{form_row(form.nomA)}}
+                    </div>
+                    <div>
+                            {{form_row(form.prenomA)}}
+                    </div>
+                    
+                    <input type="file" name="file" id="file">
+                    <!-- Drag and Drop container-->
+                    <div class="upload-area"  id="uploadfile">
+                        <h1>Faites glisser et déposez le fichier ici<br/>Où<br/>Cliquez pour sélectionner le fichier</h1>
+                    </div>
+                    
+                        <div class="ln_solid"></div>
+                        <div class="item form-group">
+                            <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
+                                <a class="btn btn-warning" href="{{ path('app_contrat_index') }}">{{ "backend.user.cancel"|trans }}</a>
+                                <button type="submit" name="valider" class="btn btn-success" >{{ "backend.user.register"|trans }}</button>
+                            </div>
+                        </div>
+                        {{ form_end(form) }}
+                    </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
